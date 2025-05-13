@@ -30,6 +30,12 @@ module katerith::calculator {
         calculator.result = num1 * num2;
     }
 
+    public entry fun devide(account: &signer, num1: u64, num2: u64) acquires Calculator {
+        let calculator = borrow_global_mut<Calculator>(signer:: address_of(account));
+        assert!(num2 != 0, 102);
+        calculator.result = num1 / num2;
+    }
+
     public fun get_result (account: &signer) : u64 acquires Calculator {
         let calculator = borrow_global<Calculator>(signer:: address_of(account));
         calculator.result
@@ -39,7 +45,9 @@ module katerith::calculator {
     public fun testing(account: &signer) acquires Calculator { 
         create_calculator(account);
         // add(account, 5, 10);
-        substract(account, 5, 10);
+        // substract(account, 5, 10);
+        // multiply(account, 5, 10);
+        devide(account, 10, 0);
         print(&get_result(account));
     }
 }
