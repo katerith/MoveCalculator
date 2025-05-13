@@ -7,8 +7,13 @@ module katerith::calculator {
     }
 
     public entry fun create_calculator(account: &signer){
-        let calculator = Calculator { result: 0 };
-        move_to(account, calculator);
+        if (exists<Calculator>(signer:: address_of(account))) {
+           let calculator = borrow_global_mut<Calculator>(signer:: address_of(account));
+           calculator.result = 0;   
+        } else {
+            let calculator = Calculator { result: 0 };
+            move_to(account, calculator);
+        }
     }
 
     public entry fun add(account: &signer, num1: u64, num2: u64) acquires Calculator {
