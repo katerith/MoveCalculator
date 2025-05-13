@@ -6,7 +6,7 @@ module katerith::calculator {
         result: u64,
     }
 
-    public entry fun create_calculator(account: &signer){
+    public entry fun create_calculator(account: &signer) {
         if (exists<Calculator>(signer:: address_of(account))) {
            let calculator = borrow_global_mut<Calculator>(signer:: address_of(account));
            calculator.result = 0;   
@@ -44,15 +44,5 @@ module katerith::calculator {
     public fun get_result (account: &signer) : u64 acquires Calculator {
         let calculator = borrow_global<Calculator>(signer:: address_of(account));
         calculator.result
-    }
-
-    #[test(account = @0x1)]
-    public fun testing(account: &signer) acquires Calculator { 
-        create_calculator(account);
-        // add(account, 5, 10);
-        // substract(account, 5, 10);
-        // multiply(account, 5, 10);
-        devide(account, 10, 0);
-        print(&get_result(account));
     }
 }
