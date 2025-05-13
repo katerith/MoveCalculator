@@ -4,6 +4,8 @@ version = "1.0.0"
 authors = []
 
 [addresses]
+katerith = "f24e890e11fb791af2378bfc35c70753a85b9b09ce827e6e9f624f77e0e82785"
+std = "0x1"
 
 [dev-addresses]
 
