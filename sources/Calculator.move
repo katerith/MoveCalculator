@@ -25,6 +25,11 @@ module katerith::calculator {
         }
     }
 
+    public entry fun multiply(account: &signer, num1: u64, num2: u64) acquires Calculator {
+        let calculator = borrow_global_mut<Calculator>(signer:: address_of(account));
+        calculator.result = num1 * num2;
+    }
+
     public fun get_result (account: &signer) : u64 acquires Calculator {
         let calculator = borrow_global<Calculator>(signer:: address_of(account));
         calculator.result
